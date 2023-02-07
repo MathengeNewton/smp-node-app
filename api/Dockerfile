@@ -1,17 +1,20 @@
-FROM node:16-alpine
+# Use the official Node.js image
+FROM node:14-alpine
 
+# Set the working directory
 WORKDIR /app
 
-# Copy and download dependencies
-COPY [".env","secret-key"]
-
+# Copy the package.json and package-lock.json files
 COPY package.json ./
 
+# Install the dependencies
 RUN npm install
 
-# Copy the source files into the image
+# Copy the rest of the files
 COPY . .
 
-EXPOSE 8082
+# Expose the default Fastify port
+EXPOSE 3000
 
-CMD npm start
+# Set the command to start the Fastify server
+CMD ["npm", "start"]

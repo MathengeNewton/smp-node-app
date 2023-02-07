@@ -3,6 +3,13 @@ services:
   smp-algo:
     build: ./smp-algo
     ports:
-      - 8080:8080
+      - 8080:3000
+    environment:
+      NODE_ENV: production
+
+  smp-api:
+    build: ./api
+    ports:
+      - 8081:3000
     environment:
       NODE_ENV: production
