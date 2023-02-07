@@ -13,8 +13,5 @@ RUN npm install
 # Copy the rest of the files
 COPY . .
 
-# Expose the default Fastify port
-EXPOSE 3000
-
 # Set the command to start the Fastify server
 CMD ["npm", "start"]
