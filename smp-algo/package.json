@@ -1,0 +1,19 @@
+{
+  "name": "smp-algo",
+  "version": "1.0.0",
+  "description": "SMP algorithm faas",
+  "main": "src/index.js",
+  "scripts": {
+    "dev":"nodemon src/index.js",
+    "test": "test",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "SMP"
+  ],
+  "author": "MathengeNewton",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.12.0"
+  }
+}

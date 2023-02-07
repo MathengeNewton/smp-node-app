@@ -1,0 +1,69 @@
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model AdminsModel {
+    id    String  @id @default(uuid())
+    user_name String 
+    email String  @unique
+    password  String  @db.VarChar(255)
+    logs AdminLogsModel[]
+    created_at DateTime @default(now())
+    updated_at DateTime?
+
+    @@map("admins")
+}
+
+model AdminLogsModel {
+    id String  @id @default(uuid())
+    category String @default("")
+    description String @default("")
+    admin_id String @unique
+    admin AdminsModel @relation(fields: [admin_id], references: [id]) 
+    created_at DateTime @default(now())
+    @@map("admin_logs")
+}
+
+model StudentsModel {
+    id    String  @id @default(uuid())
+    name String
+    email String  @unique
+    school  String  @db.VarChar(255)
+    student_no String 
+    aggregate Int
+    marks StudentsMarksModel[]
+    uni_choices UniversityChoicesModel[]
+    created_at DateTime @default(now())
+    updated_at DateTime?
+
+    @@map("students")
+}
+
+model StudentsMarksModel {
+    id String  @id @default(uuid())
+    subject String @default("")
+    score Int @default(0)
+    student_id String @unique
+    student StudentsModel @relation(fields: [student_id], references: [id]) 
+    created_at DateTime @default(now())
+    updated_at DateTime?
+
+    @@map("marks")
+}
+
+model UniversityChoicesModel {
+    id String  @id @default(uuid())
+    uni String
+    slot Int @default(0)
+    student_id String @unique
+    student StudentsModel @relation(fields: [student_id], references: [id]) 
+    created_at DateTime @default(now())
+    updated_at DateTime?
+
+    @@map("uni_choices")
+}
